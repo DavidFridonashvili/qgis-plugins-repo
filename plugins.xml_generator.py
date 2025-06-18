@@ -32,7 +32,7 @@ def create_plugins_xml():
             if tag in metadata:
                 ET.SubElement(plugin_elem, tag).text = metadata[tag]
 
-        ET.SubElement(plugin_elem, "download_url").text = f"{plugin_name}/{plugin_name}.zip"
+        ET.SubElement(plugin_elem, "download_url").text = f"https://davidfridonashvili.github.io/qgis-plugins-repo/{plugin_name}/{plugin_name}.zip"
         ET.SubElement(plugin_elem, "file_name").text = f"{plugin_name}.zip"
         ET.SubElement(plugin_elem, "icon").text = f"{plugin_name}/icon.png" if os.path.exists(icon_path) else ""
         ET.SubElement(plugin_elem, "qgis_minimum_version").text = metadata.get("qgis_minimum_version", "3.10")
