@@ -1,0 +1,32 @@
+name: Auto-regenerate plugins.xml
+
+on:
+  push:
+    paths:
+      - '**/metadata.txt'
+      - '**/*.zip'
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run XML generator
+        run: |
+          python plugins.xml_generator.py
+
+      - name: Commit and push updated plugins.xml
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add plugins.xml
+          git diff --cached --quiet || git commit -m "Auto-regenerate plugins.xml"
+          git push
