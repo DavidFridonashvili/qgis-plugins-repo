@@ -33,8 +33,13 @@ def create_plugins_xml():
                 ET.SubElement(plugin_elem, tag).text = metadata[tag]
 
         ET.SubElement(plugin_elem, "download_url").text = f"https://davidfridonashvili.github.io/qgis-plugins-repo/{plugin_name}/{plugin_name}.zip"
+        ET.SubElement(plugin_elem, "url").text = f"https://davidfridonashvili.github.io/qgis-plugins-repo/{plugin_name}/"
         ET.SubElement(plugin_elem, "file_name").text = f"{plugin_name}.zip"
-        ET.SubElement(plugin_elem, "icon").text = f"{plugin_name}/icon.png" if os.path.exists(icon_path) else ""
+
+        # ❌ REMOVE icon if not exists
+        if os.path.exists(icon_path):
+            ET.SubElement(plugin_elem, "icon").text = f"https://davidfridonashvili.github.io/qgis-plugins-repo/{plugin_name}/icon.png"
+
         ET.SubElement(plugin_elem, "qgis_minimum_version").text = metadata.get("qgis_minimum_version", "3.10")
         ET.SubElement(plugin_elem, "qgis_maximum_version").text = metadata.get("qgis_maximum_version", "3.99")
         ET.SubElement(plugin_elem, "created_date").text = datetime.now().strftime("%Y-%m-%d")
