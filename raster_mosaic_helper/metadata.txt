@@ -1,7 +1,7 @@
-name=raster_mosaic_helper
-version=1.0.0
-description=Plugin for raster mosaicking
-qgis_minimum_version=3.10
-qgis_maximum_version=3.99
-homepage=https://github.com/raster_mosaic_helper
-author_name=EOMAP
+[general]
+name=Raster Mosaic Helper
+qgisMinimumVersion=3.0
+description=Generates TXT path for SAGA mosaicking and copies on the clipboard
+version=1.0
+author=EOMAP
+email=it@eomap.de
